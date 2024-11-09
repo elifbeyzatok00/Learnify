@@ -23,16 +23,8 @@ model = genai.GenerativeModel("gemini-1.5-flash")
 
 import pathlib
 import textwrap
-
 import google.generativeai as genai
 
-from IPython.display import display
-from IPython.display import Markdown
-
-
-def to_markdown(text):
-    text = text.replace("•", "  *")
-    return Markdown(textwrap.indent(text, "> ", predicate=lambda _: True))
 
 """# Step2: generate a TOEFL Reading text
 
@@ -42,7 +34,6 @@ def to_markdown(text):
 """
 # Define a function to generate TOEFL passage
 def generate_toefl_text(topic):
-    input("Please enter a topic: ")
     prompt = f"""
     Create a 700-word academic text in the style of a TOEFL iBT Reading passage on the topic of “{topic}.” The text should resemble college-level introductory texts or academic articles, written in a clear, formal, and accessible manner suitable for comprehension testing by advanced English learners. Please ensure the text follows the format of TOEFL passages by including:
 
@@ -81,7 +72,7 @@ def generate_toefl_text(topic):
     """
     generated_content = model.generate_content(prompt)
     generated_text = generated_content.text
-    to_markdown(generated_text)
+    print(f"Generated TOEFL Reading Text about {topic}")
     
     return generated_text
 
@@ -110,57 +101,7 @@ There are 10 types in TOEFL Reading Question Types.
 """
 
 def question_types_count(prose_summary_OR_fill_in_a_table, factual_information_questions, negative_factual_information_questions, inference_questions, rhetorical_purpose_questions, vocabulary_questions, reference_questions, sentence_simplification_question):
-    # Initialize counters and remaining questions
-    counter = 0
-    number_of_remaining_questions = 10
-
-    # Fixed question
-    insert_text_question = 1
-    counter += insert_text_question
-    number_of_remaining_questions -= insert_text_question
-
-    # Prose Summary or Fill in a Table
-    prose_summary, fill_in_a_table = 0, 0
-    prose_summary_OR_fill_in_a_table = input(f"(Number of remaining questions {number_of_remaining_questions}.) Prose Summary or Fill in a Table question (only one of the two question types for each set). Please write either 'p' for Prose Summary or 'f' for Fill in a Table: ")
-    if prose_summary_OR_fill_in_a_table == "p":
-        prose_summary = 1
-        fill_in_a_table = 0
-    elif prose_summary_OR_fill_in_a_table == "f":
-        prose_summary = 0
-        fill_in_a_table = 1
-    counter += prose_summary + fill_in_a_table
-    number_of_remaining_questions -= 1
-
-    # Collect and validate input for each question type
-    factual_information_questions = int(input(f"(Number of remaining questions {number_of_remaining_questions}.) Factual Information questions (2 to 5 questions per set). Please write a number from 2 to 5: "))
-    counter += factual_information_questions
-    number_of_remaining_questions -= factual_information_questions
-
-    negative_factual_information_questions = int(input(f"(Number of remaining questions {number_of_remaining_questions}.) Negative Factual Information questions (0 to 2 questions per set). Please write a number from 0 to 2: "))
-    counter += negative_factual_information_questions
-    number_of_remaining_questions -= negative_factual_information_questions
-
-    inference_questions = int(input(f"(Number of remaining questions {number_of_remaining_questions}.) Inference questions (1 to 2 questions per set). Please write a number from 1 to 2: "))
-    counter += inference_questions
-    number_of_remaining_questions -= inference_questions
-
-    rhetorical_purpose_questions = int(input(f"(Number of remaining questions {number_of_remaining_questions}.) Rhetorical Purpose questions (1 to 2 questions per set). Please write a number from 1 to 2: "))
-    counter += rhetorical_purpose_questions
-    number_of_remaining_questions -= rhetorical_purpose_questions
-
-    vocabulary_questions = int(input(f"(Number of remaining questions {number_of_remaining_questions}.) Vocabulary questions (1 to 2 questions per set). Please write a number from 1 to 2: "))
-    counter += vocabulary_questions
-    number_of_remaining_questions -= vocabulary_questions
-
-    reference_questions = int(input(f"(Number of remaining questions {number_of_remaining_questions}.) Reference questions (0 to 2 questions per set). Please write a number from 0 to 2: "))
-    counter += reference_questions
-    number_of_remaining_questions -= reference_questions
-
-    sentence_simplification_question = int(input(f"(Number of remaining questions {number_of_remaining_questions}.) Sentence Simplification question (0 or 1 question per set). Please write a number from 0 to 1: "))
-    counter += sentence_simplification_question
-    number_of_remaining_questions -= sentence_simplification_question
-
-
+    
     # Validate total question count
     if counter == 10:
         question_types_count = {
@@ -205,7 +146,7 @@ def generate_question(generated_text, question_types_count):
 
     response = model.generate_content(prompt)
     generated_questions = response.text
-    to_markdown(generated_questions)
+    print("TOEFL Reading Questions Generated")
     
     return generated_questions
 
@@ -254,7 +195,7 @@ def generate_explanations_answers(generated_text, generated_questions):
 
     response = model2.generate_content(prompt)
     generated_explanations_answers = response.text
-    to_markdown(generated_explanations_answers)
+    print("Explanations and Answers Generated")
     
     return generated_explanations_answers
 
@@ -345,9 +286,65 @@ def generate_toefl_pdf(generated_text, generated_questions, generated_explanatio
 
     # Build PDF
     doc.build(content)
-    return f"PDF saved at: {pdf_path}"
+    print(f"PDF saved at: {pdf_path}")
+    
+    return pdf_path
 
+
+'''# Step 6: User Interface'''
+"""
+topic = input("Please enter a topic: ")
 generated_text = generate_toefl_text(topic)
+
+# Initialize counters and remaining questions
+counter = 0
+number_of_remaining_questions = 10
+
+# Fixed question
+insert_text_question = 1
+counter += insert_text_question
+number_of_remaining_questions -= insert_text_question
+
+# Prose Summary or Fill in a Table
+prose_summary, fill_in_a_table = 0, 0
+prose_summary_OR_fill_in_a_table = input(f"(Number of remaining questions {number_of_remaining_questions}.) Prose Summary or Fill in a Table question (only one of the two question types for each set). Please write either 'p' for Prose Summary or 'f' for Fill in a Table: ")
+if prose_summary_OR_fill_in_a_table == "p":
+    prose_summary = 1
+    fill_in_a_table = 0
+elif prose_summary_OR_fill_in_a_table == "f":
+    prose_summary = 0
+    fill_in_a_table = 1
+counter += prose_summary + fill_in_a_table
+number_of_remaining_questions -= 1
+
+# Collect and validate input for each question type
+factual_information_questions = int(input(f"(Number of remaining questions {number_of_remaining_questions}.) Factual Information questions (2 to 5 questions per set). Please write a number from 2 to 5: "))
+counter += factual_information_questions
+number_of_remaining_questions -= factual_information_questions
+
+negative_factual_information_questions = int(input(f"(Number of remaining questions {number_of_remaining_questions}.) Negative Factual Information questions (0 to 2 questions per set). Please write a number from 0 to 2: "))
+counter += negative_factual_information_questions
+number_of_remaining_questions -= negative_factual_information_questions
+
+inference_questions = int(input(f"(Number of remaining questions {number_of_remaining_questions}.) Inference questions (1 to 2 questions per set). Please write a number from 1 to 2: "))
+counter += inference_questions
+number_of_remaining_questions -= inference_questions
+
+rhetorical_purpose_questions = int(input(f"(Number of remaining questions {number_of_remaining_questions}.) Rhetorical Purpose questions (1 to 2 questions per set). Please write a number from 1 to 2: "))
+counter += rhetorical_purpose_questions
+number_of_remaining_questions -= rhetorical_purpose_questions
+
+vocabulary_questions = int(input(f"(Number of remaining questions {number_of_remaining_questions}.) Vocabulary questions (1 to 2 questions per set). Please write a number from 1 to 2: "))
+counter += vocabulary_questions
+number_of_remaining_questions -= vocabulary_questions
+
+reference_questions = int(input(f"(Number of remaining questions {number_of_remaining_questions}.) Reference questions (0 to 2 questions per set). Please write a number from 0 to 2: "))
+counter += reference_questions
+number_of_remaining_questions -= reference_questions
+
+sentence_simplification_question = int(input(f"(Number of remaining questions {number_of_remaining_questions}.) Sentence Simplification question (0 or 1 question per set). Please write a number from 0 to 1: "))
+counter += sentence_simplification_question
+number_of_remaining_questions -= sentence_simplification_question
 
 question_types_count = question_types_count(prose_summary_OR_fill_in_a_table, factual_information_questions, negative_factual_information_questions, inference_questions, rhetorical_purpose_questions, vocabulary_questions, reference_questions, sentence_simplification_question)
 
@@ -356,3 +353,10 @@ generated_questions = generate_question(generated_text, question_types_count)
 generated_explanations_answers= generate_explanations_answers(generated_text, generated_questions)
 
 generate_toefl_pdf(generated_text, generated_questions, generated_explanations_answers, question_types_count, pdf_path="TOEFL_Reading_Content.pdf")
+
+generated_questions = generate_question(generated_text, question_types_count)
+
+generated_explanations_answers= generate_explanations_answers(generated_text, generated_questions)
+
+generate_toefl_pdf(generated_text, generated_questions, generated_explanations_answers, question_types_count, pdf_path="TOEFL_Reading_Content.pdf")
+""" 
