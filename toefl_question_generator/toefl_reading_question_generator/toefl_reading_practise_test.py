@@ -6,6 +6,7 @@ import os
 import google.generativeai as genai
 from dotenv import load_dotenv
 import venv
+ 
 
 # .env dosyasıdan çevre değişkenlerini yükle
 load_dotenv()
@@ -100,26 +101,22 @@ There are 10 types in TOEFL Reading Question Types.
 ### Take amount of the question types
 """
 
-def question_types_count(prose_summary_OR_fill_in_a_table, factual_information_questions, negative_factual_information_questions, inference_questions, rhetorical_purpose_questions, vocabulary_questions, reference_questions, sentence_simplification_question):
+def question_types_count(prose_summary_or_fill_table, factual_information_questions, negative_factual_information_questions, inference_questions, rhetorical_purpose_questions, vocabulary_questions, reference_questions, sentence_simplification_question, insert_text_question):
+    # Define the question types and their counts
+    question_types_count = {
+        "Prose Summary or Fill in a Table": prose_summary_or_fill_table,
+        "Insert Text": insert_text_question,
+        "Factual Information": factual_information_questions,
+        "Negative Factual Information": negative_factual_information_questions,
+        "Inference": inference_questions,
+        "Rhetorical Purpose": rhetorical_purpose_questions,
+        "Vocabulary": vocabulary_questions,
+        "Reference": reference_questions,
+        "Sentence Simplification": sentence_simplification_question
+    }
+    print("Question types and counts:", question_types_count)
     
-    # Validate total question count
-    if counter == 10:
-        question_types_count = {
-            "Factual Information": factual_information_questions,
-            "Negative Factual Information": negative_factual_information_questions,
-            "Inference": inference_questions,
-            "Rhetorical Purpose": rhetorical_purpose_questions,
-            "Vocabulary": vocabulary_questions,
-            "Reference": reference_questions,
-            "Sentence Simplification": sentence_simplification_question,
-            "Insert Text": insert_text_question,
-            "Prose Summary": prose_summary,
-            "Fill in a Table": fill_in_a_table
-        }
-        print("Question types and counts:", question_types_count)
-        return question_types_count
-    else:
-        print(f"Total question count must be 10. But you chose {counter}. Please revise your choices to reach a total of 10 questions.")
+    return question_types_count
 
 
 def generate_question(generated_text, question_types_count):
@@ -275,7 +272,7 @@ def generate_toefl_pdf(generated_text, generated_questions, generated_explanatio
     # Add explanations and answers
     content.append(Paragraph("Explanations and Answers:", style_heading))
     for explanation in generated_explanations_answers_str.split('\n'):
-        cleaned_explanation = explanation.replace("## Explanations and Answers", "").replace("**", "").replace("*", "• ")
+        cleaned_explanation = explanation.replace("## Explanations and Answers", "").replace("**", "").replace("*", "")
         content.append(Paragraph(cleaned_explanation, style_text))
     content.append(Spacer(1, 12))
 
@@ -292,7 +289,7 @@ def generate_toefl_pdf(generated_text, generated_questions, generated_explanatio
 
 
 '''# Step 6: User Interface'''
-"""
+'''
 topic = input("Please enter a topic: ")
 generated_text = generate_toefl_text(topic)
 
@@ -359,4 +356,4 @@ generated_questions = generate_question(generated_text, question_types_count)
 generated_explanations_answers= generate_explanations_answers(generated_text, generated_questions)
 
 generate_toefl_pdf(generated_text, generated_questions, generated_explanations_answers, question_types_count, pdf_path="TOEFL_Reading_Content.pdf")
-""" 
+''' 
