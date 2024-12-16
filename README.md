@@ -1,6 +1,12 @@
 # Learnify
 
-Learnify is a project designed to facilitate learning through various tools and resources. This README provides instructions on how to set up and use the project.
+Learnify is a project designed to facilitate learning through various tools and resources.
+  - `toefl-reading-question-generator` is designed to generate TOEFL Reading questions, answers, and explanations using Google's Generative AI models.
+  - `lea-rag-model is designed to answer` student queastions about TOEFL IBT exam and language exam preparation techniques
+
+## Video
+
+[Project UI Video](https://drive.google.com/file/d/1wNj_IrGTSx-3KhoQtOoPwxCnNhNzznx4/view?usp=sharing)
 
 ## Installation
 
@@ -39,10 +45,6 @@ python toefl_reading_gr.py
 ```bash
 python learnify_gr.py
 ```
-
-## Video
-
-[Project UI Video](https://drive.google.com/file/d/1wNj_IrGTSx-3KhoQtOoPwxCnNhNzznx4/view?usp=sharing)
 
 ## License
 
