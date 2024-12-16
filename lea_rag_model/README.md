@@ -1,4 +1,4 @@
-### README
+### Lea RAG Model README
 
 This directory contains the files and configuration needed for the **Lea RAG Model** application. The application utilizes a Retrieval-Augmented Generation (RAG) model to provide answers to questions about the TOEFL IBT exam based on a dataset of documents.
 
