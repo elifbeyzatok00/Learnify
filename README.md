@@ -1,54 +1,111 @@
 # Learnify
 
-Learnify is a project designed to facilitate learning through various tools and resources.
-  - `toefl-reading-question-generator` is designed to generate TOEFL Reading questions, answers, and explanations using Google's Generative AI models.
-  - `lea-rag-model` is designed to answer student queastions about TOEFL IBT exam and language exam preparation techniques
+Learnify is a comprehensive project designed to facilitate learning through various tools and resources. It focuses on providing support for TOEFL exam preparation and other language learning tasks.
+
+## Features
+
+- **TOEFL Reading Question Generator**:
+
+  - Generates TOEFL-style reading passages, questions, and explanations using advanced AI models.
+  - Provides customizable question types and allows export to PDF.
+
+- **Lea RAG Model**:
+
+  - Answers student questions about the TOEFL IBT exam and provides language exam preparation techniques using a Retrieval-Augmented Generation (RAG) model.
+
+- **Learnify Website**:
+  - A Gradio-powered interface to access and navigate between the tools easily.
+
+---
 
 ## Video
 
 [Project UI Video](https://drive.google.com/file/d/1wNj_IrGTSx-3KhoQtOoPwxCnNhNzznx4/view?usp=sharing)
 
+---
+
 ## Installation
 
-To install all dependencies, run the following command:
+To install all dependencies, run the following command in the project root:
 
 ```bash
 pip install -r requirements.txt
 ```
 
+---
+
 ## Project Structure
 
-The project is organized as follows:
+```plaintext
+- interface/
+    - button_images
+    - learnify_gr.py
+    - requirements.txt
+- lea_rag_model/
+    - rag_dataset
+    - README.md
+    - lea.py
+    - lea_gr.py
+    - lea_st.py
+    - requirements.txt
+- toefl_question_generator/toefl_reading_question_generator/
+    - assets
+    - datasets
+    - README.md
+    - TOEFL_Reading_Content.pdf
+    - model.ipynb
+    - requirements.txt
+    - toefl_reading_gr.py
+    - toefl_reading_practise.py
+- .env.sample
+- .gitignore
+- LICENSE
+- README.md
+```
+
+---
 
 ## Usage
 
-**Install Dependencies:** Ensure you have all the required dependencies installed by running the command mentioned in the Installation section.
+### Install Dependencies
 
-**Run the Project:** Navigate to the appropriate directory and run the necessary scripts or notebooks.
-
-1. Stand up RAG model:
+Ensure you have all the required dependencies installed by running:
 
 ```bash
-cd lea_rag_model
-python lea_gr.py
+pip install -r requirements.txt
 ```
 
-2. Stand up Question Generator model:
+### Run the Project
 
-```bash
-cd toefl_question_generator/toefl_reading_question_generator
-python toefl_reading_gr.py
-```
+Navigate to the appropriate directory and run the necessary scripts as follows:
 
-3. Stand up Website:
+1. **Start the RAG Model**:
 
-```bash
-python learnify_gr.py
-```
+   ```bash
+   cd lea_rag_model
+   python lea_gr.py
+   ```
+
+2. **Start the Question Generator Model**:
+
+   ```bash
+   cd toefl_question_generator/toefl_reading_question_generator
+   python toefl_reading_gr.py
+   ```
+
+3. **Start the Learnify Website**:
+
+   ```bash
+   python learnify_gr.py
+   ```
+
+---
 
 ## License
 
-This project is proprietary and not licensed for use by others. All rights are reserved by the author.
+This project is proprietary, and all rights are reserved by the author. It is not licensed for external use.
+
+---
 
 ## Contact
 
