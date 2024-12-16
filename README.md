@@ -2,7 +2,7 @@
 
 Learnify is a project designed to facilitate learning through various tools and resources.
   - `toefl-reading-question-generator` is designed to generate TOEFL Reading questions, answers, and explanations using Google's Generative AI models.
-  - `lea-rag-model is designed to answer` student queastions about TOEFL IBT exam and language exam preparation techniques
+  - `lea-rag-model` is designed to answer student queastions about TOEFL IBT exam and language exam preparation techniques
 
 ## Video
 
