@@ -40,6 +40,10 @@ python toefl_reading_gr.py
 python learnify_gr.py
 ```
 
+## Video
+
+[Project UI Video](https://drive.google.com/file/d/1wNj_IrGTSx-3KhoQtOoPwxCnNhNzznx4/view?usp=sharing)
+
 ## License
 
 This project is proprietary and not licensed for use by others. All rights are reserved by the author.
