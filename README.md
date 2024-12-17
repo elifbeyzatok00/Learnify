@@ -24,16 +24,6 @@ Learnify is a comprehensive project designed to facilitate learning through vari
 
 ---
 
-## Installation
-
-To install all dependencies, run the following command in the project root:
-
-```bash
-pip install -r requirements.txt
-```
-
----
-
 ## Project Structure
 
 ```plaintext
